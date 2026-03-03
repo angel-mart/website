@@ -21,6 +21,8 @@ export default function StoreSection({
   const [search, setSearch] = useState('')
   const [renderedItems, setRenderedItems] = useState([])
   const [menuOpen, setMenuOpen] = useState(false)
+  const [ageVerified, setAgeVerified] = useState(false)
+  const [pendingCat, setPendingCat] = useState(null)
   const catSliderRef = useRef(null)
   const sentinelRef = useRef(null)
 
@@ -192,8 +194,19 @@ export default function StoreSection({
           const isFull = (idx + 1) % 5 === 0
           const cardClass = `card${isFull ? ' card-full' : ''}`
           if (item._type === 'category') {
+            const isAlcohol = item.cat.toLowerCase() === 'alcohol'
             return (
-              <div key={item.cat} className={cardClass} onClick={() => filterByCat(item.cat)}>
+              <div
+                key={item.cat}
+                className={cardClass}
+                onClick={() => {
+                  if (isAlcohol && !ageVerified) {
+                    setPendingCat(item.cat)
+                  } else {
+                    filterByCat(item.cat)
+                  }
+                }}
+              >
                 <div className="img-box">
                   <img
                     src={`assets/${item.cat}.png`}
@@ -244,6 +257,36 @@ export default function StoreSection({
           FT. <span className="footer-highlight">YASH RAJ</span>
         </p>
       </footer>
+
+      {/* Age Gate */}
+      {pendingCat && (
+        <div className="age-gate-overlay">
+          <div className="age-gate-modal">
+            <div className="age-gate-icon">🍺</div>
+            <h2 className="age-gate-title">Age Verification</h2>
+            <p className="age-gate-desc">
+              This section contains alcohol products.<br />
+              You must be 21 or older to continue.
+            </p>
+            <button
+              className="age-gate-btn age-gate-yes"
+              onClick={() => {
+                setAgeVerified(true)
+                filterByCat(pendingCat)
+                setPendingCat(null)
+              }}
+            >
+              ✅ I'm 21+ Years Old
+            </button>
+            <button
+              className="age-gate-btn age-gate-no"
+              onClick={() => setPendingCat(null)}
+            >
+              ❌ No, I'm Not
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
