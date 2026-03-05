@@ -1,0 +1,10 @@
+# Settings in the [build] context are global
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# This handles the React Router refresh issue
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
