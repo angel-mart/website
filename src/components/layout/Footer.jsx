@@ -56,7 +56,9 @@ export default function Footer() {
                     <h4 className="footer-col-title">Info</h4>
                     <ul className="footer-links">
                         <li><Link to="/terms" className="footer-link">Terms &amp; Conditions</Link></li>
-                        <li><span className="footer-link-plain">📍 Texas, USA</span></li>
+                        <li><span className="footer-link-plain">📍 Angel Convenience Mart LLC, 6387 Camp Bowie Blvd. Suite B294 Fort Worth, Texas 76116</span></li>
+                        <li><span className="footer-link-plain">📞 Call Us: <a className='footer-link-plain' href="tel:682-466-1475">682-466-1475</a></span></li>
+                        <li><span className='footer-link-plain'>📧 Email: <a className='footer-link-plain' href="mailto:shopangelmart@gmail.com">shopangelmart@gmail.com</a></span></li>
                         <li><span className="footer-link-plain">🔞 21+ to purchase alcohol</span></li>
                     </ul>
                 </div>
