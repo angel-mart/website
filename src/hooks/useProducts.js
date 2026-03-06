@@ -5,7 +5,10 @@ import { useApp } from '../context/useApp'
 const BATCH_SIZE = 12
 
 export function useProducts() {
-  const { fullData, setFullData, filterByCatRef } = useApp()
+  const { fullData, setFullData, filterByCatRef, isAdult } = useApp()
+
+  // Data visible to this user — strip Alcohol if under 21
+  const visibleData = isAdult ? fullData : fullData.filter(p => p.Category?.toLowerCase() !== 'alcohol')
   const [currentCat, setCurrentCat]     = useState('ALL')
   const [filteredData, setFilteredData] = useState([])
   const [displayedCount, setDisplayedCount] = useState(0)
@@ -23,26 +26,26 @@ export function useProducts() {
           setFilteredData(data)
         })
     } else {
-      setFilteredData(fullData)
+      setFilteredData(visibleData)
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Sync when fullData arrives
+  // Sync when fullData arrives or adult status changes
   useEffect(() => {
-    if (fullData.length > 0 && filteredData.length === 0 && search === '' && currentCat === 'ALL') {
-      setFilteredData(fullData)
+    if (fullData.length > 0 && search === '' && currentCat === 'ALL') {
+      setFilteredData(visibleData)
     }
-  }, [fullData]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fullData, isAdult]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Build rendered items
   useEffect(() => {
     if (search === '' && currentCat === 'ALL') {
-      const cats = [...new Set(fullData.map(i => i.Category).filter(Boolean))]
+      const cats = [...new Set(visibleData.map(i => i.Category).filter(Boolean))]
       setRenderedItems(cats.map(cat => ({ _type: 'category', cat })))
     } else {
       setRenderedItems(filteredData.slice(0, displayedCount))
     }
-  }, [filteredData, displayedCount, fullData, search, currentCat])
+  }, [filteredData, displayedCount, visibleData, search, currentCat])
 
   // Infinite scroll observer
   useEffect(() => {
@@ -62,8 +65,8 @@ export function useProducts() {
     setCurrentCat(cat)
     setDisplayedCount(BATCH_SIZE)
     setSearch('')
-    setFilteredData(cat === 'ALL' ? fullData : fullData.filter(p => p.Category === cat))
-  }, [fullData])
+    setFilteredData(cat === 'ALL' ? visibleData : visibleData.filter(p => p.Category === cat))
+  }, [visibleData])
 
   // Keep the context ref in sync so Footer can trigger navigation
   useEffect(() => {
@@ -74,19 +77,19 @@ export function useProducts() {
     setSearch(q)
     setDisplayedCount(BATCH_SIZE)
     if (q === '') {
-      setFilteredData(currentCat === 'ALL' ? [...fullData] : fullData.filter(p => p.Category === currentCat))
+      setFilteredData(currentCat === 'ALL' ? [...visibleData] : visibleData.filter(p => p.Category === currentCat))
     } else {
-      setFilteredData(fullData.filter(p => p.Product_Name.toLowerCase().includes(q.toLowerCase())))
+      setFilteredData(visibleData.filter(p => p.Product_Name.toLowerCase().includes(q.toLowerCase())))
     }
-  }, [fullData, currentCat])
+  }, [visibleData, currentCat])
 
   const resetToHome = useCallback(() => {
     setCurrentCat('ALL')
     setSearch('')
-    setFilteredData(fullData)
-  }, [fullData])
+    setFilteredData(visibleData)
+  }, [visibleData])
 
-  const categories = ['ALL', ...new Set(fullData.map(i => i.Category).filter(Boolean))]
+  const categories = ['ALL', ...new Set(visibleData.map(i => i.Category).filter(Boolean))]
 
   return {
     currentCat, filteredData, search, renderedItems,

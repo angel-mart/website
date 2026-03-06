@@ -544,6 +544,141 @@ header {
 }
 
 /* ═══════════════════════════════════════
+   AGE GATE
+═══════════════════════════════════════ */
+.age-gate-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.4s ease;
+}
+
+.age-gate-card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+  padding: 50px 40px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.age-gate-logo {
+  height: 72px;
+  width: auto;
+  filter: var(--aura);
+  margin-bottom: 16px;
+}
+
+.age-gate-title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin: 0 0 6px;
+}
+
+.age-gate-sub {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 24px;
+  letter-spacing: 0.5px;
+}
+
+.age-gate-divider {
+  width: 50px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 10px;
+  margin-bottom: 28px;
+}
+
+.age-gate-question {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.age-gate-notice {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.6;
+  margin: 0 0 30px;
+}
+
+.age-gate-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.age-gate-yes {
+  background: var(--accent);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 14px;
+  padding: 18px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.age-gate-yes:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+  filter: brightness(1.08);
+}
+
+.age-gate-no {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.age-gate-no:hover {
+  border-color: var(--text);
+  background: var(--bg);
+}
+
+.age-gate-legal {
+  font-size: 11px;
+  color: #aaa;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.age-gate-terms-link {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .age-gate-card { padding: 36px 24px 30px; border-radius: 24px; }
+  .age-gate-title { font-size: 22px; }
+  .age-gate-question { font-size: 18px; }
+}
+
+/* ═══════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════ */
 footer {

@@ -1,11 +1,9 @@
-import { useState } from 'react'
 import { useProducts } from '../../hooks/useProducts'
 import Header from '../layout/Header'
 import CategoryNav from '../layout/CategoryNav'
 import Footer from '../layout/Footer'
 import ProductCard from '../ui/ProductCard'
 import CategoryCard from '../ui/CategoryCard'
-import AgeGateModal from '../ui/AgeGateModal'
 
 export default function StorePage() {
   const {
@@ -14,22 +12,10 @@ export default function StorePage() {
     filterByCat, handleSearch, resetToHome,
   } = useProducts()
 
-  const [ageVerified, setAgeVerified] = useState(false)
-  const [pendingCat, setPendingCat]   = useState(null)
-
-  const handleCatClick = (cat) => {
-    const isAlcohol = cat.toLowerCase() === 'alcohol'
-    if (isAlcohol && !ageVerified) {
-      setPendingCat(cat)
-    } else {
-      filterByCat(cat)
-    }
-  }
-
   return (
     <div className="store-section">
       <Header search={search} onSearch={handleSearch} onReset={resetToHome} />
-      <CategoryNav categories={categories} currentCat={currentCat} onSelect={handleCatClick} />
+      <CategoryNav categories={categories} currentCat={currentCat} onSelect={filterByCat} />
 
       <div className={`amazon-grid-layout ${currentCat === 'ALL' ? 'amazon-grid-layout--all' : 'amazon-grid-layout--cat'}`}>
         {renderedItems.map((item, idx) => {
@@ -40,7 +26,7 @@ export default function StorePage() {
                 key={item.cat}
                 cat={item.cat}
                 isFull={isFull}
-                onClick={() => handleCatClick(item.cat)}
+                onClick={() => filterByCat(item.cat)}
               />
             )
           }
@@ -50,13 +36,6 @@ export default function StorePage() {
 
       <div id="sentinel" ref={sentinelRef} />
       <Footer />
-
-      {pendingCat && (
-        <AgeGateModal
-          onConfirm={() => { setAgeVerified(true); filterByCat(pendingCat); setPendingCat(null) }}
-          onDeny={() => setPendingCat(null)}
-        />
-      )}
     </div>
   )
 }

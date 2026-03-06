@@ -22,7 +22,7 @@ export default function TermsPage() {
         <section className="terms-section">
           <h2>2. Service Area</h2>
           <p>
-            Angel Mart operates exclusively within <strong>Texas, USA</strong>. Orders outside our
+            Angel Mart operates exclusively within <strong>Tyrant, USA</strong>. Orders outside our
             designated delivery zones will not be fulfilled. Delivery availability is subject to
             change without notice.
           </p>

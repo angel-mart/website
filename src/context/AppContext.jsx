@@ -10,6 +10,13 @@ export function AppProvider({ children }) {
   const [userData, setUserData]       = useState(null)
   const [authReady, setAuthReady]     = useState(false)   // true once first auth check done
 
+  // ── Age verification (reset every page load) ─────────
+  const [ageChecked, setAgeChecked] = useState(false)  // has the gate been answered?
+  const [isAdult, setIsAdult]       = useState(false)  // did they say yes?
+
+  const confirmAge  = () => { setAgeChecked(true); setIsAdult(true) }
+  const denyAge     = () => { setAgeChecked(true); setIsAdult(false) }
+
   // ── Overlay / modal routing ───────────────────────────
   // 'none' | 'login' | 'setup' | 'location' | 'profile'
   const [overlay, setOverlay]         = useState('none')
@@ -112,6 +119,8 @@ export function AppProvider({ children }) {
 
   return (
     <AppContext.Provider value={{
+      // age gate
+      ageChecked, isAdult, confirmAge, denyAge,
       // auth
       currentUser, userData, authReady, logout, saveProfile,
       // overlay
