@@ -1,6 +1,7 @@
 import { useProducts } from '../../hooks/useProducts'
 import Header from '../layout/Header'
 import CategoryNav from '../layout/CategoryNav'
+import PriceRangeFilter from '../ui/PriceRangeFilter'
 import Footer from '../layout/Footer'
 import ProductCard from '../ui/ProductCard'
 import CategoryCard from '../ui/CategoryCard'
@@ -10,12 +11,19 @@ export default function StorePage() {
     currentCat, search, renderedItems,
     categories, sentinelRef,
     filterByCat, handleSearch, resetToHome,
+    minPrice, maxPrice, priceRange, setPriceRange,
   } = useProducts()
 
   return (
     <div className="store-section">
       <Header search={search} onSearch={handleSearch} onReset={resetToHome} />
       <CategoryNav categories={categories} currentCat={currentCat} onSelect={filterByCat} />
+      <PriceRangeFilter
+        minPrice={minPrice}
+        maxPrice={maxPrice}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+      />
 
       <div className={`amazon-grid-layout ${currentCat === 'ALL' ? 'amazon-grid-layout--all' : 'amazon-grid-layout--cat'}`}>
         {renderedItems.map((item, idx) => {
