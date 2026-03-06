@@ -9,7 +9,6 @@ import LoginPage    from './components/auth/LoginPage'
 import SetupPage    from './components/auth/SetupPage'
 import LocationPage from './components/auth/LocationPage'
 import CartSidebar  from './components/ui/CartSidebar'
-import AgeGatePage  from './components/ui/AgeGatePage'
 import TermsPage    from './components/pages/TermsPage'
 
 function AppShell() {
@@ -19,7 +18,6 @@ function AppShell() {
     cartOpen, setCartOpen,
     currentUser,
     setDeliveryInfo, setLocationDone,
-    ageChecked,
   } = useApp()
 
   const handleCheckout = () => {
@@ -33,8 +31,6 @@ function AppShell() {
 
   return (
     <div>
-      {/* ── Age gate — blocks everything until answered ── */}
-      {!ageChecked && <AgeGatePage />}
       {/* ── Store is always rendered ── */}
       <StorePage />
 

@@ -5,10 +5,10 @@ import { useApp } from '../context/useApp'
 const BATCH_SIZE = 12
 
 export function useProducts() {
-  const { fullData, setFullData, filterByCatRef, isAdult } = useApp()
+  const { fullData, setFullData, filterByCatRef } = useApp()
 
-  // Data visible to this user — strip Alcohol if under 21
-  const visibleData = isAdult ? fullData : fullData.filter(p => p.Category?.toLowerCase() !== 'alcohol')
+  // All products visible — no age restrictions
+  const visibleData = fullData
 
   const [currentCat, setCurrentCat]         = useState('ALL')
   const [filteredData, setFilteredData]     = useState([])
@@ -66,7 +66,7 @@ export function useProducts() {
       setFilteredData(applyFilters(visibleData, currentCat, minPrice, maxPrice))
       setDisplayedCount(BATCH_SIZE)
     }
-  }, [fullData, isAdult, minPrice, maxPrice]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fullData, minPrice, maxPrice]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Build rendered items
   useEffect(() => {
