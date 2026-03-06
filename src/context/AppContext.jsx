@@ -93,6 +93,14 @@ export function AppProvider({ children }) {
     }
   }
 
+  // Save an arbitrary cart object (used when removing specific items e.g. alcohol)
+  const saveCart = (updated) => {
+    setCart(updated)
+    if (currentUser) {
+      updateDoc(doc(db, 'users', currentUser.uid), { cart: updated }).catch(() => {})
+    }
+  }
+
   const cartTotal = Object.entries(cart).reduce((sum, [name, qty]) => {
     const product = fullData.find(p => p.Product_Name === name)
     if (product) sum += parseFloat(product.Price.replace('$', '')) * qty
@@ -117,7 +125,7 @@ export function AppProvider({ children }) {
       // overlay
       overlay, goOverlay,
       // cart
-      cart, updateCart, clearCart, cartTotal, cartCount,
+      cart, saveCart, updateCart, clearCart, cartTotal, cartCount,
       cartOpen, setCartOpen,
       // products
       fullData, setFullData,

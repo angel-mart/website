@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import './App.css'
 import { AppProvider } from './context/AppContext.jsx'
@@ -8,8 +9,9 @@ import ProfilePage  from './components/pages/ProfilePage'
 import LoginPage    from './components/auth/LoginPage'
 import SetupPage    from './components/auth/SetupPage'
 import LocationPage from './components/auth/LocationPage'
-import CartSidebar  from './components/ui/CartSidebar'
-import TermsPage    from './components/pages/TermsPage'
+import CartSidebar      from './components/ui/CartSidebar'
+import CheckoutAgeGate  from './components/ui/CheckoutAgeGate'
+import TermsPage        from './components/pages/TermsPage'
 
 function AppShell() {
   const navigate = useNavigate()
@@ -20,19 +22,37 @@ function AppShell() {
     setDeliveryInfo, setLocationDone,
   } = useApp()
 
+  // 'closed' | 'gate' | 'location'  — drives what shows after checkout press
+  const [checkoutStep, setCheckoutStep] = useState('closed')
+
   const handleCheckout = () => {
     setCartOpen(false)
     if (!currentUser) {
       goOverlay('login')
     } else {
-      goOverlay('location')
+      setCheckoutStep('gate')
     }
+  }
+
+  const handleAgePass = () => {
+    setCheckoutStep('closed')
+    goOverlay('location')
+  }
+
+  const handleAgeCancel = () => {
+    setCheckoutStep('closed')
+    setCartOpen(true)
   }
 
   return (
     <div>
       {/* ── Store is always rendered ── */}
       <StorePage />
+
+      {/* ── Checkout age gate ── */}
+      {checkoutStep === 'gate' && (
+        <CheckoutAgeGate onPass={handleAgePass} onCancel={handleAgeCancel} />
+      )}
 
       {/* ── Overlays ── */}
       {overlay === 'profile' && (
