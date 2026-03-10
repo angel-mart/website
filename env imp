@@ -1,0 +1,8 @@
+firebase functions:secrets:set ad272863-dc6f-fdc4-eaf6-5e4314414e04
+# (paste your sandbox API token, press Enter)
+
+firebase functions:secrets:set BH1H3C0RAYWE1
+# (paste your sandbox Merchant ID, press Enter)
+
+firebase functions:secrets:set sandbox
+# type:  sandbox   then press Enter

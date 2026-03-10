@@ -1427,3 +1427,140 @@ footer {
 .product-price { font-size: 18px; margin: 8px 0; display: block; }
 .category-label { font-size: 14px; font-weight: 800; letter-spacing: 0.5px; }
 .category-card { cursor: pointer; }
+
+/* ═══════════════════════════════════════
+   CLOVER PAYMENT iFrame
+═══════════════════════════════════════ */
+
+.clover-card-subtitle {
+  font-size: 13px;
+  opacity: 0.5;
+  margin: 4px 0 20px;
+  font-weight: 600;
+}
+
+.clover-payment-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: opacity 0.3s;
+}
+
+.clover-payment-wrap.clover-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.clover-row { display: flex; flex-direction: column; gap: 6px; }
+
+.clover-row--split {
+  flex-direction: row;
+  gap: 14px;
+}
+
+.clover-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* The div Clover mounts its iFrame into */
+.clover-field {
+  width: 100%;
+  min-height: 52px;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  overflow: hidden;
+}
+
+.clover-field:focus-within {
+  border-color: var(--text);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="dark"] .clover-field:focus-within {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+
+/* Clover renders an <iframe> inside; make it fill the container */
+.clover-field iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.clover-error {
+  font-size: 11px;
+  font-weight: 700;
+  color: #e53e3e;
+  letter-spacing: 0.3px;
+  padding-left: 4px;
+}
+
+/* Loading state while SDK initialises */
+.clover-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+.clover-spinner,
+.pay-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Security badge */
+.clover-secure-badge {
+  font-size: 12px;
+  opacity: 0.45;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px 0 2px;
+  letter-spacing: 0.2px;
+  line-height: 1.5;
+}
+
+/* Error banner above Place Order button */
+.checkout-pay-error {
+  background: #fff5f5;
+  border: 1.5px solid #fed7d7;
+  color: #c53030;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+[data-theme="dark"] .checkout-pay-error {
+  background: #2d1515;
+  border-color: #742a2a;
+  color: #fc8181;
+}
+
+@media (max-width: 600px) {
+  .clover-row--split { flex-direction: column; gap: 16px; }
+}
