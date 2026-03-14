@@ -21,7 +21,7 @@ export function useProducts() {
 
   // Compute actual price bounds from loaded data
   const priceRange = useMemo(() => {
-    if (visibleData.length === 0) return { min: 0, max: 9999 }
+    if (!Array.isArray(visibleData) || visibleData.length === 0) return { min: 0, max: 9999 }
     const prices = visibleData
       .map(p => parseFloat(String(p.Price).replace(/[^0-9.]/g, '')))
       .filter(n => !isNaN(n))
@@ -51,10 +51,15 @@ export function useProducts() {
     if (fullData.length === 0) {
       fetch(API_URL)
         .then(r => r.json())
-        .then(data => {
+        .then(result => {
+          let data = result;
+          if (result && result.status === "success" && Array.isArray(result.data)) {
+            data = result.data;
+          }
           setFullData(data)
           setFilteredData(data)
         })
+        .catch(err => console.error("Error fetching products:", err))
     } else {
       setFilteredData(applyFilters(visibleData, currentCat, minPrice, maxPrice))
     }

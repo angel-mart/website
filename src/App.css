@@ -456,6 +456,11 @@ header {
   width: 100%;
 }
 
+.amazon-grid-layout a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* ALL tab — 2 columns, every 5th card spans full width */
 .amazon-grid-layout--all {
   grid-template-columns: repeat(2, 1fr);
@@ -508,12 +513,21 @@ header {
   width: 100%;
   height: 150px;
   background: #fafafa;
-  border-radius: 18px;
+  border-radius: 50px;
   overflow: hidden;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.category-logo {
+  border-radius: 15px;
+}
+
+.link{
+  text-decoration: none;
+  color: black;
 }
 
 .img-box img { max-width: 85%; max-height: 85%; object-fit: contain; }
@@ -1423,7 +1437,7 @@ footer {
   font-weight: 700;
 }
 
-.product-name { font-size: 12px; font-weight: 700; min-height: 36px; line-height: 1.4; margin-bottom: 6px; }
+.product-name { text-decoration: none; font-size: 12px; font-weight: 700; min-height: 36px; line-height: 1.4; margin-bottom: 6px; }
 .product-price { font-size: 18px; margin: 8px 0; display: block; }
 .category-label { font-size: 14px; font-weight: 800; letter-spacing: 0.5px; }
 .category-card { cursor: pointer; }

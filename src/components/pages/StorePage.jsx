@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useProducts } from '../../hooks/useProducts'
 import Header from '../layout/Header'
 import CategoryNav from '../layout/CategoryNav'
@@ -5,6 +6,7 @@ import PriceRangeFilter from '../ui/PriceRangeFilter'
 import Footer from '../layout/Footer'
 import ProductCard from '../ui/ProductCard'
 import CategoryCard from '../ui/CategoryCard'
+import LocationImg from "../../assets/Location.png"
 
 export default function StorePage() {
   const {
@@ -40,6 +42,22 @@ export default function StorePage() {
           }
           return <ProductCard key={item.Product_Name + idx} product={item} isFull={isFull} />
         })}
+      </div>
+
+      <div className='amazon-grid-layout'>
+        <Link to="/location">
+          <div className="card category-card card-full">
+            <div className="img-box">
+              <img
+                src={LocationImg}
+                onError={e => { e.target.src = 'assets/logo.png' }}
+                alt="Location"
+                className='category-logo'
+              />
+            </div>
+            <b className="category-label product-name">Location</b>
+          </div>
+        </Link>
       </div>
 
       <div id="sentinel" ref={sentinelRef} />

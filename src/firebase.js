@@ -13,4 +13,4 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const provider = new GoogleAuthProvider();
-export const API_URL = "https://sheetdb.io/api/v1/g048qvsq925es";
+export const API_URL = import.meta.env.VITE_DB_URL || "https://sheetdb.io/api/v1/g048qvsq925es";
