@@ -999,13 +999,14 @@ footer {
 .terms-page {
   min-height: 100vh;
   background: var(--bg);
-  padding: 50px 5%;
+  padding: 0 5%;
   animation: fadeIn 0.4s ease;
 }
 
 .terms-inner {
   max-width: 760px;
   margin: 0 auto;
+  margin-bottom: 50px;
 }
 
 .terms-title {

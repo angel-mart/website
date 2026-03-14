@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
+import Header from '../layout/Header'
+import Footer from '../layout/Footer'
 
 export default function TermsPage() {
   return (
     <div className="terms-page">
+      <Header />
       <div className="terms-inner">
-        <Link to="/" className="back-link">← Back to Store</Link>
-
         <h1 className="terms-title">Terms &amp; Conditions</h1>
         <p className="terms-date">Effective Date: March 5, 2026</p>
 
@@ -88,13 +89,8 @@ export default function TermsPage() {
             visit us in store.
           </p>
         </section>
-
-        <div className="terms-footer">
-          <Link to="/" className="login-btn" style={{ padding: '14px 40px', textDecoration: 'none', display: 'inline-flex' }}>
-            Back to Store
-          </Link>
-        </div>
       </div>
+      <Footer />
     </div>
   )
 }
