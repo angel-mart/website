@@ -13,6 +13,7 @@ import CartSidebar      from './components/ui/CartSidebar'
 import CheckoutAgeGate  from './components/ui/CheckoutAgeGate'
 import TermsPage        from './components/pages/TermsPage'
 import ContactUs        from './components/pages/ContactUs'
+import AboutUs          from './components/pages/AboutUs'
 
 function AppShell() {
   const navigate = useNavigate()
@@ -95,6 +96,7 @@ function App() {
       <Routes>
         <Route path="/checkout" element={<ProtectedCheckout />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="*" element={<AppShell />} />
       </Routes>
