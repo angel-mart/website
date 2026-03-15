@@ -39,7 +39,7 @@ export default function LocationPage({ onDone }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h4 style={{ fontSize: 16, marginBottom: 4 }}>🚚 Texas Delivery</h4>
-              <p style={{ fontSize: 12, opacity: 0.6 }}>Within 25 miles from store</p>
+              <p style={{ fontSize: 12, opacity: 0.6 }}>Within 25 miles radius from store</p>
             </div>
             <input type="radio" readOnly checked={selectedMode === 'delivery'} />
           </div>
