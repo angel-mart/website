@@ -6,7 +6,7 @@ export default function CartSidebar({ onCheckout }) {
   const items = Object.keys(cart).map(name => {
     const product = fullData.find(p => p.Product_Name === name)
     return product
-      ? { name, qty: cart[name], price: parseFloat(product.Price.replace('$', '')) }
+      ? { name, qty: cart[name], price: parseFloat(String(product.Price).replace('$', '').replace(/,/g, '')) }
       : null
   }).filter(Boolean)
 

@@ -30,7 +30,7 @@ export default function CheckoutPage() {
   const items = Object.keys(cart).map(itemName => {
     const product = fullData.find(p => p.Product_Name === itemName)
     if (!product) return null
-    return { name: itemName, qty: cart[itemName], price: parseFloat(product.Price.replace('$', '')) }
+    return { name: itemName, qty: cart[itemName], price: parseFloat(String(product.Price).replace('$', '').replace(/,/g, '')) }
   }).filter(Boolean)
 
   const subtotal     = items.reduce((sum, i) => sum + i.price * i.qty, 0)
