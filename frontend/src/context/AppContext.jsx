@@ -103,7 +103,7 @@ export function AppProvider({ children }) {
 
   const cartTotal = Object.entries(cart).reduce((sum, [name, qty]) => {
     const product = fullData.find(p => p.Product_Name === name)
-    if (product) sum += parseFloat(product.Price.replace('$', '')) * qty
+    if (product) sum += parseFloat(String(product.Price).replace('$', '').replace(/,/g, '')) * qty
     return sum
   }, 0)
 
